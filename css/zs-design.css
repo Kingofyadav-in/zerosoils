@@ -1,0 +1,930 @@
+/* ============================================================
+   ZS DESIGN — Phase 5 World-Class Design System
+   Perfect dual-theme · Mouse-tracked background
+   Wide desktop · Mobile-first responsive
+   Every pixel intentional.
+============================================================ */
+
+
+/* ════════════════════════════════════════════════════════════
+   1. THEME-ADAPTIVE DESIGN TOKENS
+════════════════════════════════════════════════════════════ */
+
+body.theme-dark {
+  --surface-1:      rgba(255,255,255,0.035);
+  --surface-2:      rgba(255,255,255,0.06);
+  --surface-3:      rgba(255,255,255,0.10);
+  --border-1:       rgba(255,255,255,0.08);
+  --border-2:       rgba(255,255,255,0.14);
+  --border-accent:  rgba(4,106,56,0.40);
+  --text-hi:        rgba(255,255,255,0.94);
+  --text-mid:       rgba(255,255,255,0.68);
+  --text-low:       rgba(255,255,255,0.45);
+  --text-faint:     rgba(255,255,255,0.30);
+  --input-bg:       rgba(255,255,255,0.05);
+  --input-border:   rgba(255,255,255,0.12);
+  --toast-bg:       #1a1a1c;
+  --toast-border:   rgba(255,255,255,0.10);
+  --toast-color:    #e8e8e8;
+}
+
+body.theme-light {
+  --surface-1:      rgba(0,0,0,0.032);
+  --surface-2:      rgba(0,0,0,0.056);
+  --surface-3:      rgba(0,0,0,0.085);
+  --border-1:       rgba(0,0,0,0.09);
+  --border-2:       rgba(0,0,0,0.14);
+  --border-accent:  rgba(4,106,56,0.38);
+  --text-hi:        rgba(0,0,0,0.88);
+  --text-mid:       rgba(0,0,0,0.64);
+  --text-low:       rgba(0,0,0,0.44);
+  --text-faint:     rgba(0,0,0,0.30);
+  --input-bg:       rgba(0,0,0,0.04);
+  --input-border:   rgba(0,0,0,0.12);
+  --toast-bg:       #ffffff;
+  --toast-border:   rgba(0,0,0,0.09);
+  --toast-color:    #111111;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   2. LIGHT MODE — FIX INVISIBLE CARD BACKGROUNDS
+   Inline styles use rgba(255,255,255,0.0x) which vanish on white.
+   Attribute selectors override without touching JS.
+════════════════════════════════════════════════════════════ */
+
+/* Very-low-alpha white backgrounds → dark tint */
+body.theme-light #page-root [style*="background:rgba(255,255,255,0.02"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,0.03"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,0.04"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,0.05"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,0.06"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,.02"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,.03"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,.04"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,.05"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,.06"] {
+  background: var(--surface-1) !important;
+}
+
+body.theme-light #page-root [style*="background:rgba(255,255,255,0.07"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,0.08"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,.07"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,.08"] {
+  background: var(--surface-2) !important;
+}
+
+body.theme-light #page-root [style*="background:rgba(255,255,255,0.09"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,0.10"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,.09"],
+body.theme-light #page-root [style*="background:rgba(255,255,255,.10"] {
+  background: var(--surface-3) !important;
+}
+
+/* Low-alpha white borders → dark tint */
+body.theme-light #page-root [style*="border:1px solid rgba(255,255,255"],
+body.theme-light #page-root [style*="border: 1px solid rgba(255,255,255"],
+body.theme-light #page-root [style*="border:1.5px solid rgba(255,255,255"],
+body.theme-light #page-root [style*="border: 1.5px solid rgba(255,255,255"] {
+  border-color: var(--border-1) !important;
+}
+
+/* Border-left accents */
+body.theme-light #page-root [style*="border-left:3px solid rgba(255,255,255"] {
+  border-left-color: var(--border-2) !important;
+}
+
+/* Low-alpha green backgrounds — lighter in light mode */
+body.theme-light #page-root [style*="background:rgba(4,106,56,0.0"],
+body.theme-light #page-root [style*="background:rgba(4,106,56,.0"] {
+  background: rgba(4,106,56,0.07) !important;
+}
+
+/* Low-alpha orange backgrounds */
+body.theme-light #page-root [style*="background:rgba(255,103,31,0.0"],
+body.theme-light #page-root [style*="background:rgba(255,103,31,.0"],
+body.theme-light #page-root [style*="background:rgba(255,103,31,0.06"],
+body.theme-light #page-root [style*="background:rgba(255,103,31,0.07"] {
+  background: rgba(255,103,31,0.07) !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   3. LIGHT MODE — TEXT CONTRAST BOOST
+   Very-low opacity text is unreadable on white.
+════════════════════════════════════════════════════════════ */
+
+/* Boost very faint text in light mode */
+body.theme-light #page-root [style*="opacity:0.28"],
+body.theme-light #page-root [style*="opacity:0.3;"],
+body.theme-light #page-root [style*="opacity:0.32"],
+body.theme-light #page-root [style*="opacity:0.35"],
+body.theme-light #page-root [style*="opacity:0.38"] {
+  opacity: 0.55 !important;
+}
+
+body.theme-light #page-root [style*="opacity:0.4;"],
+body.theme-light #page-root [style*="opacity:0.40"],
+body.theme-light #page-root [style*="opacity:0.42"],
+body.theme-light #page-root [style*="opacity:0.45"] {
+  opacity: 0.65 !important;
+}
+
+body.theme-light #page-root [style*="opacity:0.48"],
+body.theme-light #page-root [style*="opacity:0.5;"],
+body.theme-light #page-root [style*="opacity:0.50"],
+body.theme-light #page-root [style*="opacity:0.55"] {
+  opacity: 0.75 !important;
+}
+
+/* Body-level text — boost p tag contrast in light mode */
+body.theme-light p {
+  color: #2a2a2a !important;
+}
+
+body.theme-light p[style*="opacity"] {
+  color: #111 !important;
+}
+
+/* Ensure monospace code is readable in light mode */
+body.theme-light code,
+body.theme-light #page-root [style*="font-family:monospace"] {
+  color: var(--brand-green) !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   4. LIGHT MODE — GLASS CARDS (high-specificity fix)
+════════════════════════════════════════════════════════════ */
+
+body.theme-light .glass {
+  background:  rgba(255,255,255,0.80) !important;
+  border:      1px solid rgba(0,0,0,0.09) !important;
+  box-shadow:  0 2px 20px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04) !important;
+  color:       #111 !important;
+}
+
+/* Ensure all descendants of glass get readable color */
+body.theme-light .glass,
+body.theme-light .glass * {
+  --text-hi:    rgba(0,0,0,0.88);
+  --text-mid:   rgba(0,0,0,0.62);
+  --text-low:   rgba(0,0,0,0.44);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   5. LIGHT MODE — NAV & HEADER
+════════════════════════════════════════════════════════════ */
+
+body.theme-light .nav-list li a {
+  opacity:  1    !important;
+  color:    #222 !important;
+}
+
+body.theme-light .nav-list li a:hover,
+body.theme-light .nav-list li a.active {
+  color:      var(--brand-green)     !important;
+  background: rgba(4,106,56,0.09)    !important;
+  border-color: rgba(4,106,56,0.22)  !important;
+  opacity: 1 !important;
+}
+
+body.theme-light .brand-name    { color: #111 !important; }
+body.theme-light .brand-tagline { color: var(--brand-green) !important; opacity: 1 !important; }
+body.theme-light .brand-link    { color: #111 !important; }
+
+/* Five-page navigation dropdowns */
+.zs-has-dd {
+  position: relative;
+}
+
+.zs-dd-caret {
+  margin-left: 7px;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.zs-has-dd.is-open .zs-dd-caret {
+  transform: rotate(180deg);
+}
+
+.zs-dd {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  z-index: var(--z-dropdown);
+  width: min(292px, calc(100vw - 32px));
+  padding: 8px;
+  border: 1px solid var(--border-1);
+  border-radius: 16px;
+  background: rgba(12, 14, 14, 0.97);
+  box-shadow: 0 22px 54px rgba(0,0,0,0.32);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transform: translate(-50%, -6px);
+  transition: opacity var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out),
+              visibility var(--dur-fast);
+}
+
+.zs-dd-right {
+  right: 0;
+  left: auto;
+  transform: translateY(-6px);
+}
+
+.zs-has-dd.is-open .zs-dd {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.zs-has-dd.is-open .zs-dd-right {
+  transform: translateY(0);
+}
+
+body.theme-light .zs-dd {
+  background: rgba(255,255,255,0.98);
+  border-color: rgba(0,0,0,0.09);
+  box-shadow: 0 20px 46px rgba(0,0,0,0.13);
+}
+
+.zs-dd-item {
+  display: flex;
+  min-height: 54px;
+  padding: 9px 11px;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.nav-list li .zs-dd-item {
+  justify-content: center !important;
+  min-height: 54px !important;
+  padding: 9px 11px !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: normal !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.nav-list li .zs-dd-item.active {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+.zs-dd-item:hover,
+.zs-dd-item:focus-visible {
+  outline: none;
+  background: rgba(4,106,56,0.12);
+}
+
+.zs-dd-item strong {
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.zs-dd-item span {
+  margin-top: 2px;
+  font-size: 0.72rem;
+  color: var(--text-low);
+}
+
+.zs-dd-account {
+  margin: 2px 3px 7px;
+  padding: 8px 9px 11px;
+  border-bottom: 1px solid var(--border-1);
+}
+
+.zs-dd-account strong,
+.zs-dd-account span {
+  display: block;
+}
+
+.zs-dd-account strong {
+  font-size: 0.84rem;
+}
+
+.zs-dd-account span {
+  padding-top: 3px;
+  font-family: monospace;
+  font-size: 0.69rem;
+  color: var(--brand-green);
+}
+
+.zs-dd-signout {
+  width: calc(100% - 6px);
+  min-height: 44px;
+  margin: 6px 3px 2px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(248,113,113,0.08);
+  color: #f87171;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.zs-service-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  padding: 18px 20px;
+  border: 1px solid rgba(4,106,56,0.25);
+  border-radius: 16px;
+  background: rgba(4,106,56,0.07);
+}
+
+.zs-service-action-label {
+  margin-bottom: 5px;
+  color: var(--brand-green);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.zs-service-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.zs-service-action-buttons :is(.btn-primary, .btn-login) {
+  min-height: 44px;
+  padding: 10px 18px;
+  font-size: 0.83rem;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   6. LIGHT MODE — FORM INPUTS
+════════════════════════════════════════════════════════════ */
+
+/* Global: all form inputs in light mode */
+body.theme-light :where(form) :is(
+  input, textarea, select
+) {
+  background:    var(--input-bg)     !important;
+  border-color:  var(--input-border) !important;
+  color:         #111                !important;
+}
+
+body.theme-light :where(form) :is(input, textarea, select)::placeholder {
+  color: rgba(0,0,0,0.38) !important;
+  opacity: 1 !important;
+}
+
+/* field-input-zs class used in auth pages */
+body.theme-light .field-input-zs {
+  background:    var(--input-bg)     !important;
+  border-color:  var(--input-border) !important;
+  color:         #111                !important;
+}
+
+body.theme-light .field-input-zs::placeholder {
+  color: rgba(0,0,0,0.38) !important;
+}
+
+/* Verify page: OTP input */
+body.theme-light #page-root input[style*="background:rgba(255,255,255"] {
+  background:  var(--input-bg)     !important;
+  border-color: var(--input-border) !important;
+  color: #111 !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   7. LIGHT MODE — BUTTONS
+════════════════════════════════════════════════════════════ */
+
+body.theme-light .btn-login {
+  border-color: rgba(0,0,0,0.15) !important;
+  color:        #222              !important;
+}
+
+body.theme-light .btn-login:hover {
+  border-color: var(--brand-green)        !important;
+  color:        var(--brand-green)        !important;
+  background:   rgba(4,106,56,0.08)       !important;
+}
+
+/* Auth links */
+body.theme-light #page-root a[style*="color:inherit"] {
+  color: #222 !important;
+}
+
+body.theme-light #page-root a[style*="color:var(--brand-green)"] {
+  color: var(--brand-green) !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   8. LIGHT MODE — FOOTER
+════════════════════════════════════════════════════════════ */
+
+body.theme-light .site-footer {
+  background: rgba(248,249,250,0.92) !important;
+  border-top: 1px solid rgba(0,0,0,0.07) !important;
+}
+
+body.theme-light .footer-legal-links {
+  border-top-color:    rgba(0,0,0,0.08) !important;
+  border-bottom-color: rgba(0,0,0,0.08) !important;
+}
+
+body.theme-light .footer-legal-links a {
+  color: #333 !important;
+}
+
+body.theme-light .footer-bottom {
+  color: #555 !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   9. TOAST — THEME-AWARE
+   Override the hardcoded dark toast style with CSS vars.
+════════════════════════════════════════════════════════════ */
+
+#toast-root > div {
+  background:   var(--toast-bg,    #1a1a1c)              !important;
+  border-color: var(--toast-border, rgba(255,255,255,.10)) !important;
+  color:        var(--toast-color,  #e8e8e8)              !important;
+  box-shadow:   0 8px 32px rgba(0,0,0,0.22)              !important;
+}
+
+body.theme-light #toast-root > div {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10) !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   10. SCROLL REVEAL — fixed class name mismatch
+   site.js adds 'revealed'; effects.css uses 'fx-visible'.
+   This CSS handles both AND the new zs-visible class.
+════════════════════════════════════════════════════════════ */
+
+[data-reveal] {
+  opacity:   0;
+  transform: translateY(22px);
+  transition:
+    opacity   0.65s cubic-bezier(0.16,1,0.3,1),
+    transform 0.65s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* All three possible classes work */
+[data-reveal].revealed,
+[data-reveal].zs-visible,
+[data-reveal].fx-visible {
+  opacity:   1   !important;
+  transform: none !important;
+}
+
+/* Stagger children within containers */
+[data-reveal]:nth-child(2) { transition-delay:  80ms; }
+[data-reveal]:nth-child(3) { transition-delay: 160ms; }
+[data-reveal]:nth-child(4) { transition-delay: 240ms; }
+[data-reveal]:nth-child(5) { transition-delay: 320ms; }
+[data-reveal]:nth-child(6) { transition-delay: 400ms; }
+
+
+/* ════════════════════════════════════════════════════════════
+   11. MOUSE-TRACKED BACKGROUND (CSS layer)
+   JS sets --mx / --my (0..1) on :root → gradient follows cursor.
+   The mesh element uses these via JS background update.
+════════════════════════════════════════════════════════════ */
+
+:root {
+  --mx: 0.5;
+  --my: 0.5;
+}
+
+#fx-gradient-mesh {
+  transition: none; /* JS animates directly via rAF for smoothness */
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   12. CURSOR TRAIL DOTS
+════════════════════════════════════════════════════════════ */
+
+.zs-trail {
+  position:      fixed;
+  width:         7px;
+  height:        7px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index:       9996;
+  transform:     translate(-50%, -50%);
+  mix-blend-mode: screen;
+  opacity:       0;
+  transition:    opacity 0.4s ease;
+  will-change:   left, top, opacity;
+}
+
+html.fx-off .zs-trail { display: none !important; }
+body.theme-light .zs-trail { mix-blend-mode: multiply; }
+
+@media (max-width: 768px) {
+  .zs-trail { display: none !important; }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   13. NOISE TEXTURE OVERLAY (subtle film grain)
+════════════════════════════════════════════════════════════ */
+
+#fx-noise {
+  position:        fixed;
+  inset:           0;
+  z-index:         2;
+  pointer-events:  none;
+  opacity:         0.026;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.80' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  animation: zs-noise 10s steps(2) infinite;
+}
+
+body.theme-light #fx-noise { opacity: 0.014; }
+html.fx-off #fx-noise { display: none !important; }
+
+@keyframes zs-noise {
+  0%   { background-position:   0%   0%; }
+  25%  { background-position: -8%  12%; }
+  50%  { background-position: 14%  -6%; }
+  75%  { background-position:  -4% 18%; }
+  100% { background-position:   0%   0%; }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   14. 3D CARD TILT — glass + dashboard panels
+════════════════════════════════════════════════════════════ */
+
+@media (hover: hover) and (pointer: fine) {
+  .glass,
+  .life-card,
+  .zs-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition:
+      transform   0.18s ease,
+      box-shadow  0.18s ease !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   15. ROUTE TRANSITION
+════════════════════════════════════════════════════════════ */
+
+.zs-route-out {
+  animation: zs-rt-out 0.15s ease forwards !important;
+}
+.zs-route-in {
+  animation: zs-rt-in 0.25s cubic-bezier(0.16,1,0.3,1) both !important;
+}
+
+@keyframes zs-rt-out {
+  to { opacity: 0; transform: translateY(-8px) scale(0.99); }
+}
+@keyframes zs-rt-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.99); }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   16. ENHANCED BUTTON SYSTEM
+════════════════════════════════════════════════════════════ */
+
+.btn-primary {
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             6px;
+  border-radius:   12px;
+  background:      linear-gradient(135deg, #046A38, #0a9a52);
+  color:           #fff !important;
+  font-weight:     800;
+  letter-spacing:  0.2px;
+  border:          none;
+  cursor:          pointer;
+  text-decoration: none;
+  position:        relative;
+  overflow:        hidden;
+  box-shadow:      0 2px 12px rgba(4,106,56,0.30);
+  transition:
+    transform    0.16s cubic-bezier(0.34,1.56,0.64,1),
+    box-shadow   0.16s ease,
+    filter       0.16s ease;
+}
+
+.btn-primary:hover {
+  transform:  translateY(-2px) scale(1.015);
+  box-shadow: 0 6px 22px rgba(4,106,56,0.42), 0 2px 6px rgba(4,106,56,0.20);
+  filter:     brightness(1.06);
+}
+
+.btn-primary:active {
+  transform:           scale(0.97);
+  transition-duration: 0.06s;
+}
+
+.btn-login {
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  border-radius:   10px;
+  background:      transparent;
+  border:          1.5px solid var(--border-2);
+  color:           inherit;
+  font-weight:     700;
+  cursor:          pointer;
+  text-decoration: none;
+  transition:
+    border-color 0.16s ease,
+    background   0.16s ease,
+    color        0.16s ease,
+    transform    0.16s ease;
+}
+
+.btn-login:hover {
+  border-color: var(--brand-green);
+  color:        var(--brand-green) !important;
+  background:   rgba(4,106,56,0.07);
+  transform:    translateY(-1px);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   17. ZS-CARD — THEME-AWARE REUSABLE CARD
+════════════════════════════════════════════════════════════ */
+
+.zs-card {
+  padding:      22px 24px;
+  border-radius: 16px;
+  border:       1px solid var(--border-1);
+  background:   var(--surface-1);
+  transition:   border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+body.theme-dark .zs-card:hover {
+  border-color: var(--border-accent);
+  box-shadow:   0 4px 28px rgba(0,0,0,0.30), 0 0 0 1px rgba(4,106,56,0.16);
+}
+
+body.theme-light .zs-card {
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+
+body.theme-light .zs-card:hover {
+  border-color: var(--border-accent);
+  box-shadow:   0 4px 18px rgba(0,0,0,0.10);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   18. WIDE DESKTOP LAYOUT (1440px+, 1920px+)
+════════════════════════════════════════════════════════════ */
+
+@media (min-width: 1440px) {
+  :root {
+    --zs-workspace-width: 1320px;
+    --zs-wide-width:      1600px;
+    --container:          1560px;
+  }
+
+  .zs-workspace-content,
+  .site-main {
+    max-width: var(--zs-workspace-width) !important;
+  }
+
+  .header-inner {
+    padding-left:  clamp(44px,4vw,88px)  !important;
+    padding-right: clamp(44px,4vw,88px) !important;
+  }
+
+  .footer-pro {
+    max-width: var(--container);
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --zs-workspace-width: 1560px;
+    --zs-wide-width:      1840px;
+    --container:          1840px;
+  }
+
+  .header-inner {
+    padding-left:  clamp(72px,5vw,128px) !important;
+    padding-right: clamp(72px,5vw,128px) !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   19. COMMUNITY LAYOUT FIXES
+════════════════════════════════════════════════════════════ */
+
+@media (max-width: 860px) {
+  [style*="grid-template-columns:1fr 300px"],
+  [style*="grid-template-columns: 1fr 300px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   20. MOBILE RESPONSIVE OVERRIDES (600px and below)
+════════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+
+  /* Auth page padding */
+  .zs-auth-page {
+    padding: 20px 14px 36px !important;
+  }
+
+  .zs-auth-page .glass {
+    padding:       24px 18px  !important;
+    border-radius: 16px       !important;
+  }
+
+  /* Public page padding */
+  .site-main.zs-public-page {
+    padding-left:  16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Stack 2-col inline grids */
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Stack 3-col inline grids */
+  [style*="grid-template-columns:repeat(3"],
+  [style*="grid-template-columns: repeat(3"],
+  [style*="grid-template-columns:1fr 1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 4-col → 2-col on mobile */
+  [style*="grid-template-columns:repeat(4"],
+  [style*="grid-template-columns: repeat(4"] {
+    grid-template-columns: repeat(2,1fr) !important;
+  }
+
+  /* Full-width buttons on mobile */
+  .btn-primary {
+    width:       100% !important;
+    text-align:  center !important;
+  }
+
+  /* Wrapping flex rows */
+  [style*="display:flex"][style*="gap"] {
+    flex-wrap: wrap !important;
+  }
+
+  /* Dashboard workspace padding */
+  .zs-workspace-content {
+    padding-left:  14px !important;
+    padding-right: 14px !important;
+  }
+
+  /* Monospace HDI code on tiny screens */
+  [style*="letter-spacing:2px"],
+  [style*="letter-spacing: 2px"] {
+    letter-spacing: 1px  !important;
+    font-size:      0.9rem !important;
+  }
+
+  /* Toast — full width on mobile */
+  #toast-root > div {
+    max-width: calc(100vw - 32px) !important;
+  }
+
+  .zs-service-action {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .zs-dd {
+    position: static;
+    width: 100%;
+    max-height: 0;
+    padding: 0 6px;
+    border: 0;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+    transform: none !important;
+    transition: max-height var(--dur-normal) var(--ease-out), padding var(--dur-normal) var(--ease-out);
+  }
+
+  .zs-has-dd.is-open .zs-dd {
+    max-height: 290px;
+    padding: 6px;
+    margin: 4px 0;
+    border: 1px solid var(--border-1);
+  }
+
+  .nav-list .zs-dd-item {
+    padding-left: 13px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .footer-pro-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  [style*="grid-template-columns:repeat(4"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  [style*="grid-template-columns:repeat(2"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   21. AMBIENT GLOW — ENHANCED
+════════════════════════════════════════════════════════════ */
+
+body::after {
+  content:         "" !important;
+  position:        fixed !important;
+  inset:           -20% !important;
+  pointer-events:  none !important;
+  z-index:         -1 !important;
+  filter:          blur(90px) !important;
+}
+
+body.theme-dark::after {
+  background:
+    radial-gradient(circle at 18% 22%,  rgba(4,106,56,0.09)   0%, transparent 52%),
+    radial-gradient(circle at 82% 78%,  rgba(255,103,31,0.06) 0%, transparent 52%),
+    radial-gradient(circle at 52%  8%,  rgba(4,106,56,0.05)  0%, transparent 40%) !important;
+}
+
+body.theme-light::after {
+  background:
+    radial-gradient(circle at 18% 22%,  rgba(4,106,56,0.06)   0%, transparent 52%),
+    radial-gradient(circle at 82% 78%,  rgba(255,103,31,0.04) 0%, transparent 52%),
+    radial-gradient(circle at 52%  8%,  rgba(4,106,56,0.03)  0%, transparent 40%) !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   22. SCROLLBAR — BOTH THEMES
+════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar          { width: 5px; height: 5px; }
+::-webkit-scrollbar-track    { background: transparent; }
+::-webkit-scrollbar-thumb    { background: var(--brand-green); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--brand-orange); }
+
+body.theme-light ::-webkit-scrollbar-thumb { background: rgba(4,106,56,0.45); }
+
+
+/* ════════════════════════════════════════════════════════════
+   23. REDUCED MOTION SAFETY
+════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  .zs-trail,
+  #fx-noise,
+  .btn-primary,
+  .btn-login,
+  .zs-card,
+  .glass {
+    transition: none  !important;
+    animation:  none  !important;
+    transform:  none  !important;
+    opacity:    1     !important;
+  }
+
+  .zs-route-out,
+  .zs-route-in { animation: none !important; }
+}

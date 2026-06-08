@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zero Soils — Human Digital Identity Community</title>
+  <meta name="description" content="Zero Soils issues Human Digital Identity codes after email and mobile verification." />
+  <meta property="og:title"       content="Zero Soils — HDI Community" />
+  <meta property="og:description" content="Your digital identity starts from the ground up." />
+  <meta name="theme-color"        content="#000000" />
+
+  <link rel="icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
+
+  <!-- Theme + FX flash prevention (applied before first paint) -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('zs-theme') || 'dark';
+      document.documentElement.classList.add('theme-' + t);
+      document.body && document.body.classList.add('theme-' + t);
+      if (localStorage.getItem('zs-fx') === 'off')
+        document.documentElement.classList.add('fx-off');
+    })();
+  </script>
+
+  <!-- Profile's exact CSS stack -->
+  <link rel="stylesheet" href="/css/brand-tokens.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/layout.css" />
+  <link rel="stylesheet" href="/css/effects.css" />
+
+  <!-- ZeroSoils community CSS (on top) -->
+  <link rel="stylesheet" href="/css/community.css" />
+
+  <!-- Phase 5 — world-class design system: dual-theme fixes, effects, wide desktop -->
+  <link rel="stylesheet" href="/css/zs-design.css" />
+
+  <style>
+    /* ZeroSoils palette override — maps Profile vars to ZS brand */
+    :root {
+      --zs-green:  #046A38;
+      --zs-orange: #FF671F;
+    }
+    /* Gradient mesh behind the app */
+    #fx-gradient-mesh { display: block; }
+  </style>
+</head>
+
+<body class="theme-dark">
+
+  <!-- Skip link -->
+  <a href="#page-root" class="skip-link">Skip to content</a>
+
+  <!-- Gradient mesh background (Profile pattern) -->
+  <div id="fx-gradient-mesh" aria-hidden="true"></div>
+
+  <!-- Film grain noise overlay (Phase 5) -->
+  <div id="fx-noise" aria-hidden="true"></div>
+
+  <!-- Scroll progress (Profile pattern) -->
+  <div id="scrollProgress"></div>
+
+  <div id="app">
+
+    <!-- HEADER — Profile glass header pattern -->
+    <header class="site-header glass" id="site-header">
+      <div class="header-inner">
+
+        <!-- Logo + brand (same as Profile) -->
+        <a href="/" class="brand-link" data-page="home">
+          <img id="siteLogo" src="/logo/night-logo.png" alt="Zero Soils" class="logo" title="Toggle theme" />
+          <div class="brand-text">
+            <span class="brand-name">Zero Soils</span>
+            <span class="brand-tagline">HDI | Wallet | Licence</span>
+          </div>
+        </a>
+
+        <!-- 5-page navigation with world-class dropdowns -->
+        <nav aria-label="Main navigation" id="primary-nav">
+          <ul class="nav-list" id="site-nav">
+
+            <li><a href="/" data-page="home">Home</a></li>
+
+            <li class="zs-has-dd">
+              <a href="/hdi" data-page="hdi" class="zs-dd-trigger" id="nav-hdi-btn" aria-haspopup="true" aria-expanded="false">
+                HDI
+                <svg class="zs-dd-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+              </a>
+              <div class="zs-dd" id="dd-hdi" role="menu" aria-label="HDI menu"></div>
+            </li>
+
+            <li class="zs-has-dd">
+              <a href="/wallet" class="zs-dd-trigger" data-page="wallet" aria-haspopup="true" aria-expanded="false">
+                Wallet
+                <svg class="zs-dd-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+              </a>
+              <div class="zs-dd" id="dd-wallet" role="menu" aria-label="Wallet menu"></div>
+            </li>
+
+            <li class="zs-has-dd">
+              <a href="/licence" class="zs-dd-trigger" data-page="licence" aria-haspopup="true" aria-expanded="false">
+                Licence
+                <svg class="zs-dd-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+              </a>
+              <div class="zs-dd" id="dd-licence" role="menu" aria-label="Licence menu"></div>
+            </li>
+
+            <li><a href="/community" data-page="community">Community</a></li>
+
+          </ul>
+        </nav>
+
+        <!-- Auth bar — signed-out + signed-in states -->
+        <div class="auth-bar zs-header-actions">
+          <button id="fxToggle" class="zs-fx-btn" title="Toggle effects &amp; audio" aria-label="Toggle effects and audio" aria-pressed="true">⚡</button>
+
+          <!-- Signed out -->
+          <div id="zs-auth-out" style="display:flex;gap:8px;align-items:center">
+            <a href="#" class="btn-login" data-page="login"    style="font-size:0.82rem;padding:7px 16px">Sign in</a>
+            <a href="#" class="btn-primary" data-page="register" style="font-size:0.82rem;padding:7px 16px">Join Free</a>
+          </div>
+
+          <!-- Signed in (hidden until auth check) -->
+          <div id="zs-auth-in" style="display:none;align-items:center;gap:10px">
+            <a href="#" class="btn-login" data-page="wallet" id="wallet-chip"
+               style="font-size:0.78rem;padding:5px 14px;border-radius:999px;display:inline-flex;align-items:center;gap:4px">
+              ZS <span id="nav-balance">0</span>
+            </a>
+            <div class="zs-has-dd" style="position:relative">
+              <button class="zs-avatar-btn zs-dd-trigger" id="user-avatar-btn"
+                      aria-haspopup="true" aria-expanded="false" aria-label="User menu">
+                <span id="user-avatar-letter">U</span>
+              </button>
+              <div class="zs-dd zs-dd-right" id="dd-user" role="menu" aria-label="User menu"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </header>
+
+    <!-- PAGE ROOT — SPA renders here -->
+    <main id="page-root"></main>
+
+    <!-- BASIC MODE — shown only when JavaScript is disabled -->
+    <noscript>
+      <style>
+        #app { display: none !important; }
+        .zs-nojs {
+          font-family: system-ui, sans-serif;
+          max-width: 640px;
+          margin: 60px auto;
+          padding: 0 24px 80px;
+          color: #f0f0f0;
+          background: #0a0a0a;
+          min-height: 100vh;
+        }
+        .zs-nojs a { color: #046A38; }
+        .zs-nojs h1 { font-size: 2rem; font-weight: 900; margin-bottom: 8px; }
+        .zs-nojs h2 { font-size: 1.2rem; font-weight: 800; margin: 32px 0 8px; }
+        .zs-nojs p  { line-height: 1.75; opacity: 0.75; margin-bottom: 10px; }
+        .zs-nojs .tag {
+          display: inline-block; padding: 3px 12px; border-radius: 999px;
+          border: 1px solid #046A38; color: #046A38; font-size: 0.8rem;
+          font-weight: 700; margin-bottom: 20px;
+        }
+        .zs-nojs .cta {
+          display: inline-block; margin-top: 24px; padding: 14px 28px;
+          background: #046A38; color: #fff; border-radius: 12px;
+          font-weight: 700; text-decoration: none; font-size: 0.95rem;
+        }
+        .zs-nojs .step { padding: 14px 16px; border-left: 3px solid #046A38; margin-bottom: 10px; background: rgba(4,106,56,0.06); border-radius: 0 8px 8px 0; }
+        .zs-nojs .step strong { display: block; margin-bottom: 3px; }
+        .zs-nojs footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; opacity: 0.4; }
+      </style>
+      <div class="zs-nojs">
+        <p style="margin-top:0;font-size:0.8rem;opacity:0.5">Zero Soils · Basic Mode</p>
+        <h1>Human Digital Identity</h1>
+        <span class="tag">Human Digital Identity</span>
+        <p>Zero Soils issues a permanent HDI code after the account email and mobile number have been confirmed.</p>
+        <p>This is the basic information view. Interactive HDI issuance, wallet access and licence tools require the enhanced application experience.</p>
+
+        <h2>How it works</h2>
+        <div class="step"><strong>1 · Register</strong>Create a free account with your email and mobile number.</div>
+        <div class="step"><strong>2 · Verify</strong>Confirm both your email and phone with a one-time code.</div>
+        <div class="step"><strong>3 · Receive your HDI</strong>Your permanent identity code is issued — format: INITIALS-YEAR-HEX6.</div>
+        <div class="step"><strong>4 · Use your identity</strong>Access HDI-linked services after issuance.</div>
+
+        <h2>Issuance status</h2>
+        <p><strong>Verified</strong> — Email and mobile confirmed; permanent HDI issued.</p>
+
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:zerosoils.in@gmail.com">zerosoils@gmail.com</a></p>
+
+        <a class="cta" href="https://zerosoils.com">Enable JavaScript to use Zero Soils →</a>
+
+        <footer>
+          © 2026 Zero Soils · Operated by Amit Ku Yadav ·
+          This basic view provides essential information only.
+        </footer>
+      </div>
+    </noscript>
+
+    <!-- Creator identity footer shared by every route -->
+    <footer class="site-footer glass" data-footer></footer>
+
+    <!-- Toast root -->
+    <div id="toast-root" aria-live="polite" style="position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:8px;z-index:600"></div>
+
+  </div><!-- /#app -->
+
+  <!-- JS — HDI must load before app.js -->
+  <script src="/public/js/hdi.js"></script>
+  <script src="/public/js/router.js"></script>
+  <script src="/public/js/auth.js"></script>
+  <script src="/public/js/api.js"></script>
+  <script src="/public/js/device-auth.js"></script>
+  <script src="/public/js/app.js"></script>
+  <script src="/public/js/site.js"></script>
+  <script src="/public/js/fx.js"></script>
+</body>
+</html>

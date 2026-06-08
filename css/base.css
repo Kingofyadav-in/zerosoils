@@ -1,0 +1,733 @@
+/* ======================================================
+  BASE PRO CSS
+  Global Foundation System
+  Brand: Green (Trust) + Orange (Energy)
+  Author: Amit Ku Yadav
+  Sections: tokens | reset | typography | utilities | themes | motion
+====================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ======================================================
+   1. DESIGN TOKENS (PRO BRAND SYSTEM)
+====================================================== */
+
+:root {
+
+  /* Layout */
+  --container: 1400px;
+  --section-pad-v: clamp(80px, 9vw, 140px);
+  --section-pad-h: clamp(20px, 5vw, 64px);
+
+  /* Spacing */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 24px;
+  --space-lg: 48px;
+  --space-xl: 80px;
+
+  /* Radius & Effects */
+  --radius: 18px;
+  --blur: 18px;
+
+  /* Typography Colors */
+  --text-primary: #111;
+  --text-secondary: #333;
+  --text-muted: #555;
+
+  --text-dark: #111;
+  --text-light: #e5e5e5;
+
+  /* Brand Core */
+  --brand-green: #046A38;
+  --brand-green-deep: #034f2a;
+  --brand-green-soft: rgba(4,106,56,0.15);
+
+  --brand-orange: #FF671F;
+  --brand-orange-deep: #e55a16;
+  --brand-orange-soft: rgba(255,103,31,0.15);
+
+  --brand-blue: #000080;
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(
+    135deg,
+    var(--brand-green),
+    var(--brand-orange)
+  );
+
+  --gradient-soft: linear-gradient(
+    135deg,
+    var(--brand-green-soft),
+    var(--brand-orange-soft)
+  );
+
+  /* Card System */
+  --card-border-dark: rgba(255,255,255,0.12);
+  --card-border-light: rgba(0,0,0,0.12);
+
+  --card-shadow-dark: 0 10px 30px rgba(0,0,0,0.45);
+  --card-shadow-light: 0 10px 30px rgba(0,0,0,0.08);
+
+  /* Form System */
+  --field-bg-dark: rgba(255,255,255,0.045);
+  --field-bg-light: #f7f8fa;
+  --field-border-dark: rgba(255,255,255,0.12);
+  --field-border-light: rgba(0,0,0,0.12);
+  --field-border-focus: rgba(4,106,56,0.38);
+  --field-radius: 14px;
+  --field-min-height: 48px;
+  --field-gap: 16px;
+  --field-label: var(--brand-green);
+  --field-label-muted: rgba(4,106,56,0.72);
+  --field-placeholder: rgba(90,90,90,0.55);
+  --field-shadow-focus: 0 0 0 3px rgba(4,106,56,0.14);
+
+  /* Z-Index Scale */
+  --z-below:   -1;
+  --z-base:     0;
+  --z-raised:  10;
+  --z-dropdown:100;
+  --z-sticky:  200;
+  --z-fixed:   300;
+  --z-overlay: 400;
+  --z-modal:   500;
+  --z-toast:   600;
+  --z-top:     999;
+
+  /* Transition Durations */
+  --dur-instant:  80ms;
+  --dur-fast:    160ms;
+  --dur-normal:  240ms;
+  --dur-slow:    400ms;
+  --dur-enter:   300ms;
+  --dur-exit:    200ms;
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.4, 0, 1, 1);
+  --ease-inout:  cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Shadow Scale */
+  --shadow-xs:  0 1px 2px rgba(0,0,0,0.08);
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.10);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.12);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.18);
+  --shadow-xl:  0 16px 64px rgba(0,0,0,0.24);
+  --shadow-brand-green: 0 4px 20px rgba(4,106,56,0.28);
+  --shadow-brand-orange:0 4px 20px rgba(255,103,31,0.28);
+  --shadow-brand-glow:
+    0 0 0 1px rgba(4,106,56,0.15),
+    0 8px 32px rgba(4,106,56,0.20),
+    0 16px 48px rgba(255,103,31,0.10);
+
+  /* Focus Ring */
+  --focus-ring: 0 0 0 3px rgba(4,106,56,0.22);
+  --focus-ring-orange: 0 0 0 3px rgba(255,103,31,0.22);
+  --focus-ring-offset: 2px;
+}
+
+/* ======================================================
+   2. RESET
+====================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background: var(--brand-orange);
+  color: #fff;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+/* ======================================================
+   3. BODY & THEMES
+====================================================== */
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.1px;
+
+  min-height: 100vh;
+  padding-top: 80px;
+
+  animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+}
+
+/* Dark Theme */
+
+body.theme-dark {
+  background: #000;
+  color: var(--text-light);
+
+  --card-bg: #1c1c1e;
+  --card-border: var(--card-border-dark);
+  --card-shadow: var(--card-shadow-dark);
+  --card-text: var(--text-light);
+  --field-bg: var(--field-bg-dark);
+  --field-border: var(--field-border-dark);
+  --field-label-color: var(--field-label);
+  --field-placeholder-color: rgba(255,255,255,0.38);
+  --field-ghost: rgba(255,255,255,0.055);
+}
+
+/* Light Theme */
+
+body.theme-light {
+  background: #fff;
+  color: var(--text-dark);
+
+  --card-bg: #ffffff;
+  --card-border: var(--card-border-light);
+  --card-shadow: var(--card-shadow-light);
+  --card-text: var(--text-dark);
+  --field-bg: var(--field-bg-light);
+  --field-border: var(--field-border-light);
+  --field-label-color: var(--field-label);
+  --field-placeholder-color: var(--field-placeholder);
+  --field-ghost: rgba(128,128,128,0.055);
+}
+
+/* Ambient Dual Brand Glow */
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 20% 30%, var(--brand-green-soft), transparent 50%),
+    radial-gradient(circle at 80% 70%, var(--brand-orange-soft), transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(100px);
+}
+
+/* ======================================================
+   4. TYPOGRAPHY
+====================================================== */
+
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.12;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  line-height: 1.25;
+}
+
+h3 {
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  line-height: 1.4;
+}
+
+p {
+  margin-bottom: 0.75em;
+  color: var(--text-muted);
+}
+
+body.theme-dark p {
+  color: #999;
+}
+
+body.theme-light p {
+  color: var(--text-secondary);
+}
+
+/* Accent (Gradient Text) */
+
+.accent {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hero Label */
+
+.hero-label {
+  color: var(--brand-green);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 24px;
+}
+
+/* ======================================================
+   5. ACCESSIBILITY
+====================================================== */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: #000;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ======================================================
+   6. GLASS SYSTEM (PRO)
+====================================================== */
+
+.glass {
+  backdrop-filter: blur(var(--blur)) saturate(160%);
+  border-radius: var(--radius);
+}
+
+body.theme-dark .glass {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.37),
+    0 0 0 1px var(--brand-green-soft);
+}
+
+body.theme-light .glass {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(0,0,0,0.12);
+}
+
+/* ======================================================
+   7. BRAND BUTTON UTILITY
+====================================================== */
+
+.btn-brand {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 50px;
+  background: var(--gradient-brand);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.btn-brand:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 25px rgba(4,106,56,0.3),
+    0 8px 20px rgba(255,103,31,0.3);
+}
+
+/* ======================================================
+   8. FORM SYSTEM
+====================================================== */
+
+form {
+  display: grid;
+  gap: var(--field-gap);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+label {
+  overflow-wrap: anywhere;
+}
+
+:where(form) :is(
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="number"],
+  input[type="url"],
+  input[type="search"],
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"],
+  input[type="file"],
+  textarea,
+  select
+) {
+  width: 100% !important;
+  min-height: var(--field-min-height) !important;
+  padding: 14px 16px !important;
+  border: 1px solid var(--field-border) !important;
+  border-radius: var(--field-radius) !important;
+  background: var(--field-bg) !important;
+  color: inherit !important;
+  line-height: 1.45 !important;
+  outline: none !important;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+:where(form) :is(
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="number"],
+  input[type="url"],
+  input[type="search"],
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"],
+  input[type="file"],
+  textarea,
+  select
+)::placeholder {
+  color: var(--field-placeholder-color);
+  opacity: 1;
+}
+
+:where(form) :is(
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="number"],
+  input[type="url"],
+  input[type="search"],
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"],
+  input[type="file"],
+  textarea,
+  select
+):focus {
+  border-color: var(--field-border-focus) !important;
+  box-shadow: var(--field-shadow-focus) !important;
+}
+
+:where(form) textarea {
+  min-height: 136px !important;
+  resize: vertical !important;
+}
+
+:where(form) select {
+  cursor: pointer !important;
+}
+
+body.theme-dark :where(form) select option {
+  color: #f5f5f5 !important;
+  background: #111 !important;
+}
+
+body.theme-light :where(form) select option {
+  color: #111 !important;
+  background: #fff !important;
+}
+
+:where(form) :is(input, select, textarea):disabled {
+  cursor: not-allowed !important;
+  opacity: 0.62 !important;
+}
+
+:where(.form-row, .order-form-grid, .wallet-form, .ecosystem-form, .collab-form, .auth-panel form, .lc-join-form, .vault-form) {
+  gap: clamp(14px, 1.6vw, 20px);
+}
+
+:where(.form-group, .wallet-field, .ecosystem-field, .auth-field, .hi-field, .vault-field, .pd-field, .lc-join-form > .field, .brand-form > .field, .order-form .form-group) {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+}
+
+:where(.form-group, .wallet-field, .ecosystem-field, .auth-field, .hi-field, .vault-field, .pd-field, .lc-join-form > .field, .brand-form > .field, .order-form .form-group, .lc-join-form > label, .brand-form > label) {
+  color: var(--field-label-color) !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.1px !important;
+  line-height: 1.35 !important;
+  text-transform: uppercase !important;
+}
+
+:where(.form-group, .wallet-field, .ecosystem-field, .auth-field, .hi-field, .vault-field, .pd-field, .lc-join-form > .field, .brand-form > .field, .order-form .form-group) :is(
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="number"],
+  input[type="url"],
+  input[type="search"],
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"],
+  input[type="file"],
+  textarea,
+  select
+) {
+  min-height: var(--field-min-height) !important;
+  font-size: 0.94rem !important;
+}
+
+:where(.form-group, .wallet-field, .ecosystem-field, .auth-field, .hi-field, .vault-field, .pd-field, .lc-join-form > .field, .brand-form > .field, .order-form .form-group) textarea {
+  min-height: 136px !important;
+}
+
+@media (max-width: 720px) {
+  :where(.form-row, .order-form-grid, .wallet-form, .ecosystem-form, .collab-form, .auth-panel form, .lc-join-form, .vault-form) {
+    gap: 14px;
+  }
+}
+
+/* ======================================================
+   8. SCROLL PROGRESS BAR
+====================================================== */
+
+#scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--brand-green), var(--brand-orange));
+  z-index: 9999;
+  border-radius: 0 2px 2px 0;
+  transition: width 0.05s linear;
+  pointer-events: none;
+}
+
+/* ======================================================
+   9. BACK TO TOP BUTTON
+====================================================== */
+
+#backToTop {
+  position: fixed;
+  bottom: 32px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-green), var(--brand-orange));
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 998;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 16px rgba(4,106,56,0.3);
+}
+
+#backToTop.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#backToTop:hover {
+  box-shadow: 0 8px 24px rgba(4,106,56,0.4), 0 4px 12px rgba(255,103,31,0.3);
+  transform: translateY(-3px);
+}
+
+#backToTop svg {
+  width: 18px;
+  height: 18px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ======================================================
+   10. RESPONSIVE
+====================================================== */
+
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+    padding-top: 72px;
+  }
+
+  #backToTop {
+    bottom: 92px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14.5px;
+    padding-top: 68px;
+  }
+}
+/* ======================================================
+   GLOBAL HEADER SYSTEM (STABLE + CLEAN)
+====================================================== */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* Header container */
+.header-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 14px var(--section-pad-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand */
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.brand-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.brand-tagline {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* Nav */
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list li a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  position: relative;
+  padding-bottom: 4px;
+  white-space: nowrap;
+}
+
+.nav-list li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--gradient-brand);
+  transition: width 0.3s ease;
+}
+
+.nav-list li a:hover::after,
+.nav-list li a.active::after {
+  width: 100%;
+}
+
+/* Mobile nav handled by hamburger in components.css */
+
+/* ======================================================
+   GLOBAL FOCUS-VISIBLE — keyboard accessibility system
+   Single rule covers every interactive element site-wide.
+   :focus-visible fires for keyboard only (not mouse/touch).
+====================================================== */
+
+:focus-visible {
+  outline: 2px solid var(--brand-green);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Remove default outline when :focus-visible is supported */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Tighter radius on pill/round elements */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  border-radius: 6px;
+}
+
+/* Inputs keep a field-level ring instead of the global outline */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(4, 106, 56, 0.22);
+}

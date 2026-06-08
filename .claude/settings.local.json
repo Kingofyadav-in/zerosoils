@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check /home/kingofyadav/galaxy/apps/zerosoils/public/js/app.js)",
+      "Bash(node --check /home/kingofyadav/galaxy/apps/zerosoils/dev-server.js)"
+    ]
+  }
+}

@@ -1,0 +1,564 @@
+/* ======================================================
+   effects.css — World-Class Pro UI v2
+   12 Features: Tilt · Scrollbar · Ripple · BlurUp ·
+   PageTransitions · Progress · Magnetic · Skeleton ·
+   GradientMesh · ThemeFlash · BlogSearch · StickyLabels
+   Author: Amit Ku Yadav
+====================================================== */
+
+
+/* ── 1. 3D Card Tilt (desktop / hover-capable only) ─── */
+
+@media (hover: hover) and (pointer: fine) {
+  .life-card,
+  .blog-card,
+  .service-card,
+  .connect-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+}
+
+
+/* ── 2. Custom Scrollbar ────────────────────────────── */
+
+::-webkit-scrollbar          { width: 5px; height: 5px; }
+::-webkit-scrollbar-track    { background: transparent; }
+::-webkit-scrollbar-thumb    {
+  background: var(--brand-green, #046A38);
+  border-radius: 999px;
+  transition: background 0.3s;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--brand-orange, #FF671F); }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand-green, #046A38) transparent;
+}
+
+
+/* ── 3. Button Ripple ───────────────────────────────── */
+
+.btn-primary,
+.btn-secondary {
+  position: relative;
+  overflow: hidden;
+}
+
+.fx-ripple {
+  position: absolute;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: fx-ripple 0.65s ease-out forwards;
+}
+
+@keyframes fx-ripple {
+  to { width: 340px; height: 340px; opacity: 0; }
+}
+
+
+/* ── 4. Blur-Up Image Loading ───────────────────────── */
+
+img.fx-blur-img {
+  filter: blur(10px) saturate(0.5);
+  transition: filter 0.55s ease;
+}
+
+img.fx-blur-img.fx-blur-loaded {
+  filter: blur(0) saturate(1);
+}
+
+
+/* ── 5. Page Transitions (View Transitions API) ─────── */
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: fx-page-out 0.2s ease forwards;
+}
+
+::view-transition-new(root) {
+  animation: fx-page-in 0.25s ease forwards;
+}
+
+@keyframes fx-page-out {
+  to { opacity: 0; transform: translateY(-10px); }
+}
+
+@keyframes fx-page-in {
+  from { opacity: 0; transform: translateY(10px); }
+}
+
+
+/* ── 6. Reading / Scroll Progress Bar ───────────────── */
+
+#scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--brand-green, #046A38), var(--brand-orange, #FF671F));
+  z-index: 1001;
+  border-radius: 0 2px 2px 0;
+  transition: width 0.08s linear;
+  pointer-events: none;
+}
+
+
+/* ── 7. Magnetic Button ─────────────────────────────── */
+
+.btn-primary {
+  transition: transform 0.15s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+/* ── 8. Skeleton Loading ────────────────────────────── */
+
+.fx-skel-card {
+  border-radius: var(--radius, 18px);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  min-height: 260px;
+}
+
+body.theme-light .fx-skel-card {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+.fx-skel {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.05) 25%,
+    rgba(255,255,255,0.13) 50%,
+    rgba(255,255,255,0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: fx-shimmer 1.6s infinite linear;
+  border-radius: 6px;
+}
+
+body.theme-light .fx-skel {
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.05) 25%,
+    rgba(0,0,0,0.1) 50%,
+    rgba(0,0,0,0.05) 75%
+  );
+  background-size: 200% 100%;
+}
+
+.fx-skel-h  { width: 100%; height: 160px; border-radius: 0; }
+.fx-skel-body { padding: 20px 20px 16px; display: flex; flex-direction: column; gap: 10px; }
+.fx-skel-ln   { height: 13px; width: 80%; }
+.fx-skel-ln-s { width: 42%; height: 9px; }
+.fx-skel-ln-l { width: 96%; height: 36px; }
+
+@keyframes fx-shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+
+/* ── 9. Animated Gradient Mesh Background ───────────── */
+
+#fx-gradient-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 1;
+  background:
+    radial-gradient(ellipse 85% 65% at 8% 18%,  rgba(4,106,56,0.13)  0%, transparent 58%),
+    radial-gradient(ellipse 65% 85% at 92% 82%,  rgba(255,103,31,0.09) 0%, transparent 58%),
+    radial-gradient(ellipse 55% 45% at 52% 108%, rgba(4,106,56,0.07)  0%, transparent 55%);
+  animation: fx-mesh 18s ease-in-out infinite alternate;
+  will-change: opacity, transform;
+}
+
+body.theme-light #fx-gradient-mesh {
+  background:
+    radial-gradient(ellipse 85% 65% at 8% 18%,  rgba(4,106,56,0.07)  0%, transparent 58%),
+    radial-gradient(ellipse 65% 85% at 92% 82%,  rgba(255,103,31,0.05) 0%, transparent 58%),
+    radial-gradient(ellipse 55% 45% at 52% 108%, rgba(4,106,56,0.04)  0%, transparent 55%);
+}
+
+@keyframes fx-mesh {
+  0%   { opacity: 1;   transform: scale(1)    translate(0%, 0%); }
+  33%  { opacity: 0.8; transform: scale(1.04) translate(1%, -1%); }
+  66%  { opacity: 0.9; transform: scale(1.02) translate(-1%, 1%); }
+  100% { opacity: 1;   transform: scale(1.06) translate(2%, -2%); }
+}
+
+@media (max-width: 768px) {
+  #fx-gradient-mesh {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+
+/* ── 10. Theme Switch Flash ─────────────────────────── */
+
+.fx-theme-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: var(--brand-green, #046A38);
+  animation: fx-theme-flash 0.32s ease forwards;
+}
+
+@keyframes fx-theme-flash {
+  0%   { opacity: 0.14; }
+  60%  { opacity: 0.08; }
+  100% { opacity: 0; }
+}
+
+
+/* ── 11. Blog Search UI ─────────────────────────────── */
+
+.fx-blog-search {
+  margin: 0 0 28px;
+}
+
+.fx-blog-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 11px 20px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.fx-blog-search-bar:focus-within {
+  border-color: var(--brand-green, #046A38);
+  box-shadow: 0 0 0 3px rgba(4, 106, 56, 0.12);
+}
+
+.fx-blog-search-bar svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  opacity: 0.45;
+  color: var(--brand-green, #046A38);
+}
+
+.fx-blog-search-bar input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: inherit;
+  font-size: 0.9rem;
+  font-family: inherit;
+  min-width: 0;
+}
+
+.fx-blog-search-bar input::placeholder { opacity: 0.38; }
+
+.fx-blog-count {
+  font-size: 0.7rem;
+  opacity: 0.4;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.fx-blog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.fx-tag-btn {
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(128, 128, 128, 0.22);
+  background: transparent;
+  color: inherit;
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.fx-tag-btn:hover  { border-color: var(--brand-green, #046A38); color: var(--brand-green, #046A38); }
+.fx-tag-btn.active { background: var(--brand-green, #046A38); border-color: var(--brand-green, #046A38); color: #fff; }
+
+.fx-no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+  opacity: 0.45;
+  font-size: 0.9rem;
+}
+
+body.theme-light .fx-blog-search-bar {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 480px) {
+  .fx-blog-search {
+    margin: 0 0 20px;
+  }
+
+  .fx-blog-search-bar {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .fx-blog-search-bar input {
+    font-size: 0.85rem;
+  }
+
+  .fx-blog-count {
+    display: none;
+  }
+
+  .fx-blog-tags {
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .fx-tag-btn {
+    padding: 4px 11px;
+    font-size: 0.68rem;
+  }
+}
+
+
+/* ── 12. Sticky Section Labels ──────────────────────── */
+
+.abt-section-label,
+.pro-section-label {
+  position: sticky;
+  top: 76px; /* desktop header height */
+  z-index: 50;
+  padding: 5px 16px 5px 26px;
+  border-radius: 999px;
+  backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid transparent;
+  transition: box-shadow 0.3s, border-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+}
+
+body.theme-dark .abt-section-label,
+body.theme-dark .pro-section-label {
+  background: rgba(8, 8, 8, 0.72);
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+body.theme-light .abt-section-label,
+body.theme-light .pro-section-label {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+@media (max-width: 768px) {
+  .abt-section-label,
+  .pro-section-label {
+    top: 70px; /* mobile header min-height: 70px */
+  }
+}
+
+
+/* ── Existing: Particle Canvas ──────────────────────── */
+
+#fx-particle-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.home-intro .hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ── Existing: Scroll Reveal ────────────────────────── */
+
+.fx-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity  0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fx-reveal.fx-visible { opacity: 1; transform: translateY(0); }
+
+.fx-stagger > .fx-reveal:nth-child(1) { transition-delay:   0ms; }
+.fx-stagger > .fx-reveal:nth-child(2) { transition-delay:  90ms; }
+.fx-stagger > .fx-reveal:nth-child(3) { transition-delay: 180ms; }
+.fx-stagger > .fx-reveal:nth-child(4) { transition-delay: 270ms; }
+.fx-stagger > .fx-reveal:nth-child(5) { transition-delay: 360ms; }
+.fx-stagger > .fx-reveal:nth-child(6) { transition-delay: 450ms; }
+
+
+/* ── Existing: Typewriter Cursor ────────────────────── */
+
+.fx-tw-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.82em;
+  background: var(--brand-green, #046A38);
+  margin-left: 3px;
+  vertical-align: middle;
+  border-radius: 2px;
+  animation: fx-blink 1.1s step-start infinite;
+}
+
+@keyframes fx-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+
+/* ── Existing: Accent Glow ──────────────────────────── */
+
+@keyframes fx-glow {
+  0%, 100% { text-shadow: 0 0 14px rgba(4,106,56,0.55); }
+  50%       { text-shadow: 0 0 30px rgba(4,106,56,0.8), 0 0 60px rgba(255,103,31,0.22); }
+}
+
+.accent { animation: fx-glow 3.5s ease-in-out infinite; }
+
+
+/* ── 13. Cursor Spotlight ───────────────────────────── */
+
+#fx-cursor-glow {
+  position: fixed;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow-color, rgba(4,106,56,0.06)) 0%, transparent 65%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  transition: background 0.3s ease;
+  will-change: left, top;
+}
+
+@media (max-width: 768px) {
+  #fx-cursor-glow { display: none; }
+}
+
+
+/* ── 14. Theme Ripple from Logo ─────────────────────── */
+
+.fx-logo-ripple {
+  position: fixed;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: radial-gradient(circle, rgba(4,106,56,0.18) 0%, rgba(4,106,56,0.04) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 9997;
+  animation: fx-logo-ripple 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fx-logo-ripple {
+  0%   { transform: translate(-50%,-50%) scale(0);   opacity: 1; }
+  70%  { opacity: 0.6; }
+  100% { transform: translate(-50%,-50%) scale(1);   opacity: 0; }
+}
+
+
+/* ── 15. Logo Spin on Theme Toggle ──────────────────── */
+
+.logo.fx-spin {
+  animation: fx-logo-spin 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+@keyframes fx-logo-spin {
+  0%   { transform: scale(0.78) rotate(0deg); }
+  100% { transform: scale(1)    rotate(360deg); }
+}
+
+
+/* ── 16. Particle Burst ─────────────────────────────── */
+
+.fx-particle {
+  position: fixed;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  animation: fx-particle-burst 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fx-particle-burst {
+  to {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy)));
+    opacity: 0;
+  }
+}
+
+
+/* ── 17. FX Kill-switch (html.fx-off) ──────────────── */
+
+html.fx-off #fx-cursor-glow    { opacity: 0 !important; pointer-events: none; }
+html.fx-off .fx-logo-ripple    { display: none !important; }
+html.fx-off .fx-particle       { display: none !important; }
+html.fx-off .logo.fx-spin      { animation: none !important; transform: none !important; }
+html.fx-off #fx-gradient-mesh  { animation: none !important; opacity: 0.4 !important; }
+html.fx-off #scrollProgress    { display: none !important; }
+
+/* FX toggle button */
+.zs-fx-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 5px 7px;
+  border-radius: 8px;
+  opacity: 0.7;
+  transition: opacity 0.2s, background 0.2s;
+  line-height: 1;
+}
+
+.zs-fx-btn:hover { opacity: 1; background: rgba(128,128,128,0.1); }
+
+.zs-fx-btn.fx-btn-off {
+  opacity: 0.35;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+
+/* ── Reduced Motion: disable all effects ────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-reveal           { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .fx-tw-cursor        { animation: none; opacity: 1; }
+  .accent              { animation: none; }
+  #fx-particle-canvas  { display: none; }
+  #fx-gradient-mesh    { animation: none; }
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
+  .fx-skel             { animation: none; }
+  img.fx-blur-img      { filter: none; transition: none; }
+  #fx-cursor-glow      { display: none; }
+  .fx-logo-ripple      { display: none; }
+  .logo.fx-spin        { animation: none !important; }
+  .fx-particle         { display: none; }
+}

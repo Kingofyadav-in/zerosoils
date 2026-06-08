@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "name": "Zero Soils",
+    "tagline": "Rooted in truth. Built for people.",
+    "version": "1.0.0"
+  },
+  "color": {
+    "soil":        "#070D09",
+    "forest":      "#0F1F15",
+    "canopy":      "#1B4332",
+    "leaf":        "#2D6A4F",
+    "sprout":      "#52B788",
+    "growth":      "#95D5B2",
+    "earth":       "#C8963E",
+    "clay":        "#8B5E3C",
+    "sand":        "#E8DCC8",
+    "cream":       "#F0EAD6",
+    "white":       "#FFFFFF",
+    "truthGlow":   "rgba(82,183,136,0.18)",
+    "earthGlow":   "rgba(200,150,62,0.15)",
+    "gradient":    "linear-gradient(135deg, #1B4332 0%, #C8963E 100%)",
+    "gradientSoft":"linear-gradient(135deg, rgba(27,67,50,0.18) 0%, rgba(200,150,62,0.12) 100%)"
+  },
+  "shadow": {
+    "sprout": "0 4px 20px rgba(82,183,136,0.28)",
+    "earth":  "0 4px 20px rgba(200,150,62,0.28)",
+    "glow":   "0 0 0 1px rgba(82,183,136,0.15), 0 8px 32px rgba(82,183,136,0.18), 0 16px 48px rgba(200,150,62,0.10)"
+  }
+}

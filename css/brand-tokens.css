@@ -1,0 +1,11 @@
+/* AUTO-GENERATED — edit brand-tokens.json, not this file */
+:root {
+  --brand-green: #046A38;
+  --brand-green-deep: #034f2a;
+  --brand-green-soft: rgba(4,106,56,0.15);
+  --brand-orange: #FF671F;
+  --brand-orange-deep: #e55a16;
+  --brand-orange-soft: rgba(255,103,31,0.15);
+  --shadow-brand-green: 0 4px 20px rgba(4,106,56,0.28);
+  --shadow-brand-orange: 0 4px 20px rgba(255,103,31,0.28);
+}

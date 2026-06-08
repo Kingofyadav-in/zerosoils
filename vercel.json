@@ -1,0 +1,17 @@
+{
+  "outputDirectory": ".",
+  "rewrites": [
+    { "source": "/api/auth/:action*",      "destination": "/api/auth" },
+    { "source": "/api/community/:action*", "destination": "/api/community" },
+    { "source": "/api/hdi/:action*",       "destination": "/api/hdi" },
+    { "source": "/api/licences/:action*",  "destination": "/api/licences" },
+    { "source": "/api/user/:action*",      "destination": "/api/user" },
+    { "source": "/api/waitlist/:action*",  "destination": "/api/waitlist" },
+    { "source": "/api/wallet/:action*",    "destination": "/api/wallet" },
+    { "source": "/api/admin/:action*",     "destination": "/api/admin" },
+    { "source": "/@:handle",               "destination": "/u/index.html" },
+    { "source": "/u/@:handle",             "destination": "/u/index.html" },
+    { "source": "/u/:handle",              "destination": "/u/index.html" },
+    { "source": "/(.*)",                   "destination": "/index.html" }
+  ]
+}
